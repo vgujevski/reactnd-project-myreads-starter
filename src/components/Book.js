@@ -15,7 +15,7 @@ class Book extends React.Component {
         <div className="book">
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-            <ShelfChanger book={book}/>
+            <ShelfChanger book={book} onChangeShelf={this.props.onChangeShelf}/>
           </div>
           <div className="book-title">{book.title}</div>
           <div className="book-authors">{printAuthors(book.authors)}</div>
@@ -26,7 +26,8 @@ class Book extends React.Component {
 }
 
 Book.propTypes = {
-  book: PropTypes.object.isRequired
+  book: PropTypes.object.isRequired,
+  onChangeShelf: PropTypes.func.isRequired,
 }
 
 export default Book
