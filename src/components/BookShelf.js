@@ -7,7 +7,7 @@ class BookShelf extends React.Component {
   render() {
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{this.props.shelfName}</h2>
+        <h2 className="bookshelf-title">{this.props.shelfName ? this.props.shelfName : ''}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
             {
@@ -24,7 +24,7 @@ class BookShelf extends React.Component {
 
 BookShelf.propTypes = {
   books: PropTypes.array.isRequired,
-  shelfName: PropTypes.string.isRequired,
+  shelfName: PropTypes.string,
   onChangeShelf: PropTypes.func.isRequired,
 }
 
