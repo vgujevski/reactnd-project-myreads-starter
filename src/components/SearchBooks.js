@@ -8,27 +8,34 @@ import { search } from '../BooksAPI'
 class SearchBooks extends React.Component {
 
   handleChange = (e) => {
-    // TODO handle books without author property
-    // TODO handle books without imageLinks property
-    // TODO handle query error objects
-    search(e.target.value).then(result => {
-      if (result.error) {
-        console.log(JSON.stringify(result, null, 2));
-      } else {
-        this.props.searchBooks(this.validateBooks(result))
-      }
-
-
-    })
+    console.log('handleChange called with: ', e.target.value);
+    if (e.target.value === '') {
+      this.props.searchBooks([])
+    } else {
+      search(e.target.value).then(result => {
+        if (result && result.error) {
+          console.log(JSON.stringify(result, null, 2));
+          this.props.searchBooks([])
+        } else {
+          this.props.searchBooks(this.validateBooks(result))
+        }
+      })
+    }
   }
 
   filterBooksWithoutAuthors = (books) => {
-    const filteredBooks = books.filter(book => Boolean(book.authors))
+    let filteredBooks = []
+    if (books) {
+      filteredBooks = books.filter(book => Boolean(book.authors))
+    }
     return filteredBooks
   }
 
   filterBooksWithoutImageLinks = (books) => {
-    const filteredBooks = books.filter(book => Boolean(book.imageLinks))
+    let filteredBooks = []
+    if (books) {
+      filteredBooks = books.filter(book => Boolean(book.imageLinks))
+    }
     return filteredBooks
   }
 
