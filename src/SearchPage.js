@@ -3,31 +3,16 @@ import React from 'react'
 import SearchBooks from './components/SearchBooks'
 import BookShelf from './components/BookShelf'
 import { WANT_TO_READ, READ, CURRENTLY_READING } from './constants'
-import { update, getAll } from './BooksAPI'
+import { update } from './BooksAPI'
 
-// TODO keep two different states for books found in search and for books o=in collection
 class SearchPage extends React.Component {
 
   state = {
-    foundBooks: [],
-    books: [],
+    foundBooks: []
   }
 
-  addFoundBooks = () => {
-
-  }
-
-  addBooks = (foundBooks) => {
+  addFoundBooks = (foundBooks) => {
     this.setState({ foundBooks })
-  }
-
-  componentDidMount() {
-    // TODO 
-    // getAll().then(result => {
-    //   this.setState({
-    //     books: result
-    //   })
-    // })
   }
 
   changeShelf = (book, newShelf) => {
@@ -57,12 +42,11 @@ class SearchPage extends React.Component {
   render() {
     return (
       <div>
-        <SearchBooks searchBooks={this.addBooks} />
-        <BookShelf books={this.getBooksOnShelf(this.state.books, WANT_TO_READ.filter)} shelfName={WANT_TO_READ.title} onChangeShelf={this.changeShelf} />
-        <BookShelf books={this.getBooksOnShelf(this.state.books, CURRENTLY_READING.filter)} shelfName={CURRENTLY_READING.title} onChangeShelf={this.changeShelf} />
-        <BookShelf books={this.getBooksOnShelf(this.state.books, READ.filter)} shelfName={READ.title} onChangeShelf={this.changeShelf} />
+        <SearchBooks searchBooks={this.addFoundBooks} />
+        <BookShelf books={this.getBooksOnShelf(this.state.foundBooks, WANT_TO_READ.filter)} shelfName={WANT_TO_READ.title} onChangeShelf={this.changeShelf} />
+        <BookShelf books={this.getBooksOnShelf(this.state.foundBooks, CURRENTLY_READING.filter)} shelfName={CURRENTLY_READING.title} onChangeShelf={this.changeShelf} />
+        <BookShelf books={this.getBooksOnShelf(this.state.foundBooks, READ.filter)} shelfName={READ.title} onChangeShelf={this.changeShelf} />
         <BookShelf books={this.state.foundBooks} onChangeShelf={this.changeShelf}/>
-
       </div>
     )
   }
