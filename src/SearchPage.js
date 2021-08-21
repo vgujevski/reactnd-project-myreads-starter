@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import SearchBooks from './components/SearchBooks'
 import BookShelf from './components/BookShelf'
-import { WANT_TO_READ, READ, CURRENTLY_READING } from './constants'
+import { WANT_TO_READ, READ, CURRENTLY_READING, NONE } from './constants'
 
 class SearchPage extends React.Component {
 
@@ -13,6 +13,7 @@ class SearchPage extends React.Component {
 
   addFoundBooks = (foundBooks) => {
     this.setState({ foundBooks })
+
   }
 
   /**
