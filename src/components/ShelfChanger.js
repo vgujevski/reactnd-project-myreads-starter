@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { WANT_TO_READ, READ, NONE, CURRENTLY_READING } from '../constants'
 
 class ShelfChanger extends React.Component {
 
@@ -9,14 +10,23 @@ class ShelfChanger extends React.Component {
 
   render() {
     const { book } = this.props
+
+    const getValue = (book) => {
+      if(book && book.shelf) {
+        return book.self
+      } else {
+        return NONE.filter
+      }
+    }
+
     return (
       <div className="book-shelf-changer">
-        <select value={book.shelf} onChange={(e) => this.handleChange(book, e)}>
+        <select value={getValue(book)} onChange={(e) => this.handleChange(book, e)}>
           <option value="move" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
+          <option value={CURRENTLY_READING.filter}>Currently Reading</option>
+          <option value={WANT_TO_READ.filter}>Want to Read</option>
+          <option value={READ.filter}>Read</option>
+          <option value={NONE.filter}>None</option>
         </select>
       </div>
     )
