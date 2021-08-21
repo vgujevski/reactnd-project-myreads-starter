@@ -13,7 +13,7 @@ class ShelfChanger extends React.Component {
 
     const getValue = (book) => {
       if(book && book.shelf) {
-        return book.self
+        return book.shelf
       } else {
         return NONE.filter
       }

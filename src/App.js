@@ -46,7 +46,6 @@ class BooksApp extends React.Component {
 
   getBooksOnShelf = (books, shelf) => {
     const booksOnShelf = books.filter(book => book.shelf === shelf)
-    console.log(booksOnShelf)
     return booksOnShelf
   }
 

@@ -14,9 +14,18 @@ class MainPage extends React.Component {
         <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
-            <BookShelf books={this.props.getBooksOnShelf(this.props.books, WANT_TO_READ.filter)} shelfName={WANT_TO_READ.title} onChangeShelf={this.props.changeShelf} />
-            <BookShelf books={this.props.getBooksOnShelf(this.props.books, CURRENTLY_READING.filter)} shelfName={CURRENTLY_READING.title} onChangeShelf={this.props.changeShelf} />
-            <BookShelf books={this.props.getBooksOnShelf(this.props.books, READ.filter)} shelfName={READ.title} onChangeShelf={this.props.changeShelf} />
+            <BookShelf
+              books={this.props.getBooksOnShelf(this.props.books, CURRENTLY_READING.filter)}
+              shelfName={CURRENTLY_READING.title}
+              onChangeShelf={this.props.changeShelf} />
+            <BookShelf
+              books={this.props.getBooksOnShelf(this.props.books, WANT_TO_READ.filter)}
+              shelfName={WANT_TO_READ.title}
+              onChangeShelf={this.props.changeShelf} />
+            <BookShelf
+              books={this.props.getBooksOnShelf(this.props.books, READ.filter)}
+              shelfName={READ.title}
+              onChangeShelf={this.props.changeShelf} />
           </div>
           <div className="open-search">
             <Link to="/search">Search</Link>

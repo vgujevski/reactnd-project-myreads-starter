@@ -51,12 +51,12 @@ class SearchPage extends React.Component {
 
         {/** Users Collection */}
         <BookShelf
-          books={this.getFoundCollectionBooks(this.state.foundBooks, this.props.books, WANT_TO_READ.filter)}
-          shelfName={WANT_TO_READ.title}
-          onChangeShelf={this.props.changeShelf} />
-        <BookShelf
           books={this.getFoundCollectionBooks(this.state.foundBooks, this.props.books, CURRENTLY_READING.filter)}
           shelfName={CURRENTLY_READING.title}
+          onChangeShelf={this.props.changeShelf} />
+        <BookShelf
+          books={this.getFoundCollectionBooks(this.state.foundBooks, this.props.books, WANT_TO_READ.filter)}
+          shelfName={WANT_TO_READ.title}
           onChangeShelf={this.props.changeShelf} />
         <BookShelf
           books={this.getFoundCollectionBooks(this.state.foundBooks, this.props.books, READ.filter)}
