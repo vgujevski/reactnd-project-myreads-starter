@@ -9,6 +9,8 @@ import BookShelf from './components/BookShelf'
 class MainPage extends React.Component {
 
   render() {
+    console.log('MainPage render called');
+
     return (
       <div className="app">
         <div className="list-books">

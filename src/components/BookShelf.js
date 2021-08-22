@@ -18,6 +18,7 @@ class BookShelf extends React.Component {
   }
 
   render() {
+    console.log('BookShhelf render called');
     return (
       <div>
         {this.props.books.length > 0 &&
