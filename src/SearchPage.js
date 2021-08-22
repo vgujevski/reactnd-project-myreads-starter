@@ -13,9 +13,8 @@ class SearchPage extends React.Component {
 
   addFoundBooks = (foundBooks) => {
     const books = foundBooks.map(book => ({ ...book, shelf: NONE.filter }))
-    console.log(JSON.stringify(books, null, 2));
+    console.log('books length: ', JSON.stringify(books.length, null, 2));
     this.setState({ foundBooks: books })
-
   }
 
   /**
@@ -24,9 +23,9 @@ class SearchPage extends React.Component {
    */
   getMatchingBooks = (searchResults, usersCollection) => {
     const usersCollectionIDs = new Set()
-    for (const item of searchResults) {
-      usersCollectionIDs.add(item.id)
-    }
+    searchResults.array.forEach((book) => {
+      usersCollectionIDs.add(book.id)
+    })
 
     const matchingBooks = usersCollection.filter(resultItem => usersCollectionIDs.has(resultItem.id))
     return matchingBooks
@@ -64,11 +63,27 @@ class SearchPage extends React.Component {
   }
 
   updateSearchResults = (foundBooks, usersCollection) => {
-    const mastchingBooks = this.getMatchingBooks(foundBooks, usersCollection)
+    const matchingBooks = this.getMatchingBooks(foundBooks, usersCollection)
 
+    const updatedBooks = foundBooks.map(foundBook => {
+      matchingBooks.forEach(book => {
+        if (foundBook.id === book.id) {
+          return {
+            ...foundBook,
+            shelf: book.shelf
+          }
+        } else {
+          return foundBook
+        }
+      })
+    })
+
+    return updatedBooks
   }
 
   render() {
+    //const books = this.updateSearchResults(this.state.foundBooks, this.props.books)
+
     return (
       <div>
         <SearchBooks searchBooks={this.addFoundBooks} />

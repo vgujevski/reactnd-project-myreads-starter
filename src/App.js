@@ -18,11 +18,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    getAll().then(result => {
-      this.setState({
-        books: result
-      })
-    })
+    getAll().then(books => this.setState({books}))
   }
 
   changeShelf = (book, newShelf) => {

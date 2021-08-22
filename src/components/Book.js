@@ -26,7 +26,10 @@ class Book extends React.Component {
 }
 
 Book.propTypes = {
-  book: PropTypes.object.isRequired,
+  book: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
   onChangeShelf: PropTypes.func.isRequired,
 }
 
