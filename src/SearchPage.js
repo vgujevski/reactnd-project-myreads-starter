@@ -23,9 +23,12 @@ class SearchPage extends React.Component {
    */
   getMatchingBooks = (searchResults, usersCollection) => {
     const usersCollectionIDs = new Set()
-    searchResults.array.forEach((book) => {
+    // searchResults.array.forEach((book) => {
+    //   usersCollectionIDs.add(book.id)
+    // })
+    for (const book of searchResults) {
       usersCollectionIDs.add(book.id)
-    })
+    }
 
     const matchingBooks = usersCollection.filter(resultItem => usersCollectionIDs.has(resultItem.id))
     return matchingBooks
@@ -64,25 +67,20 @@ class SearchPage extends React.Component {
 
   updateSearchResults = (foundBooks, usersCollection) => {
     const matchingBooks = this.getMatchingBooks(foundBooks, usersCollection)
-
+  
     const updatedBooks = foundBooks.map(foundBook => {
-      matchingBooks.forEach(book => {
-        if (foundBook.id === book.id) {
-          return {
-            ...foundBook,
-            shelf: book.shelf
-          }
-        } else {
-          return foundBook
-        }
-      })
+      const exists = matchingBooks.find(b => foundBook.id == b.id)
+      if(exists){
+        foundBook.shelf = exists.shelf
+      }
+  
+      return foundBook
     })
-
     return updatedBooks
   }
 
   render() {
-    //const books = this.updateSearchResults(this.state.foundBooks, this.props.books)
+    const books = this.updateSearchResults(this.state.foundBooks, this.props.books)
 
     return (
       <div>
@@ -90,17 +88,14 @@ class SearchPage extends React.Component {
 
         {/** Users Collection */}
         <BookShelf
-          //books={this.getFoundCollectionBooks(this.state.foundBooks, this.props.books, CURRENTLY_READING.filter)}
-          books={this.props.getBooksOnShelf(this.state.foundBooks, CURRENTLY_READING.filter)}
+          books={this.props.getBooksOnShelf(books, CURRENTLY_READING.filter)}
           shelfName={CURRENTLY_READING.title}
           onChangeShelf={this.changeFoundBookShelf} />
         <BookShelf
-          //books={this.getFoundCollectionBooks(this.state.foundBooks, this.props.books, WANT_TO_READ.filter)}
           books={this.props.getBooksOnShelf(this.state.foundBooks, WANT_TO_READ.filter)}
           shelfName={WANT_TO_READ.title}
           onChangeShelf={this.changeFoundBookShelf} />
         <BookShelf
-          //books={this.getFoundCollectionBooks(this.state.foundBooks, this.props.books, READ.filter)}
           books={this.props.getBooksOnShelf(this.state.foundBooks, READ.filter)}
           shelfName={READ.title}
           onChangeShelf={this.changeFoundBookShelf} />

@@ -1,4 +1,4 @@
-// book shelves
+/** Book Shelves */
 export const CURRENTLY_READING = {
   filter: 'currentlyReading',
   title: 'Currently Reading'
