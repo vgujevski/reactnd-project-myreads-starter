@@ -23,9 +23,6 @@ class SearchPage extends React.Component {
    */
   getMatchingBooks = (searchResults, usersCollection) => {
     const usersCollectionIDs = new Set()
-    // searchResults.array.forEach((book) => {
-    //   usersCollectionIDs.add(book.id)
-    // })
     for (const book of searchResults) {
       usersCollectionIDs.add(book.id)
     }
@@ -33,21 +30,6 @@ class SearchPage extends React.Component {
     const matchingBooks = usersCollection.filter(resultItem => usersCollectionIDs.has(resultItem.id))
     return matchingBooks
   }
-
-  // getFoundCollectionBooks = (searchResults, usersCollection, shelfName) => {
-  //   const matchingBooks = this.getMatchingBooks(searchResults, usersCollection)
-  //   return this.props.getBooksOnShelf(matchingBooks, shelfName)
-  // }
-
-  // filterOutCollectionBooks = (searchResults, usersCollection) => {
-  //   const usersCollectionIDs = new Set()
-  //   for (const item of usersCollection) {
-  //     usersCollectionIDs.add(item.id)
-  //   }
-
-  //   const matchingBooks = searchResults.filter(resultItem => !usersCollectionIDs.has(resultItem.id))
-  //   return matchingBooks
-  // }
 
   changeFoundBookShelf = (book, newShelf) => {
     this.setState((prevState) => ({
@@ -69,7 +51,7 @@ class SearchPage extends React.Component {
     const matchingBooks = this.getMatchingBooks(foundBooks, usersCollection)
   
     const updatedBooks = foundBooks.map(foundBook => {
-      const exists = matchingBooks.find(b => foundBook.id == b.id)
+      const exists = matchingBooks.find(b => foundBook.id === b.id)
       if(exists){
         foundBook.shelf = exists.shelf
       }

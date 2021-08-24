@@ -39,7 +39,12 @@ class MainPage extends React.Component {
 }
 
 MainPage.propTypes = {
-  books: PropTypes.array.isRequired,
+  //books: PropTypes.array.isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape({
+    shelf: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  })).isRequired,
   changeShelf: PropTypes.func.isRequired,
   getBooksOnShelf: PropTypes.func.isRequired,
 }

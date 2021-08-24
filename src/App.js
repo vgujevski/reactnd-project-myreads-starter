@@ -18,7 +18,8 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    getAll().then(books => this.setState({books}))
+    console.log('App cdm called');
+    this.updateBookData()
   }
 
   changeShelf = (book, newShelf) => {
@@ -34,14 +35,17 @@ class BooksApp extends React.Component {
         }
       })
     }))
-    console.log('changeShelf called')
     update(book, newShelf).then((res) => {
-      console.log(JSON.stringify(res, null, 2))
+      this.updateBookData()
     })
   }
 
   getBooksOnShelf = (books, shelf) => {
     return books.filter(book => book.shelf === shelf)
+  }
+
+  updateBookData = () => {
+    getAll().then(books => this.setState({books}))
   }
 
   render() {
