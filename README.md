@@ -1,6 +1,6 @@
 # MyReads Project
 
-Fianl assessment project for Udacity's React Fundamentals course.
+Final assessment project for Udacity's React Fundamentals course.
 
 ## TL;DR
 
